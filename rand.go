@@ -2,18 +2,18 @@ package nvm
 
 import (
 	"bufio"
-	"log"
 	"math/rand"
 	"os"
 	"time"
 )
 
 // RandomLine returns whatever
-func RandomLine(path string) (int, string) {
+func RandomLine(path string) (int, string, error) {
 
 	file, err := os.Open(path)
+
 	if err != nil {
-		log.Fatal(err)
+		return -1, "", err
 	}
 
 	defer file.Close()
@@ -45,5 +45,6 @@ func RandomLine(path string) (int, string) {
 		line = line[0 : len(line)-1]
 	}
 
-	return line_num, line
+	// We're done here
+	return line_num, line, nil
 }
